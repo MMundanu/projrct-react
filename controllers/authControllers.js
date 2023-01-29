@@ -1,4 +1,5 @@
 let createError = require('http-errors');
+const errorResponse = require('../helpers/errorResponse');
 
 
 module.exports = {
@@ -17,13 +18,9 @@ module.exports = {
                 msg: 'Usuario registrado'
             })
         } catch (error) {
-            console.log(error);
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error || 'Upss, hubo un error'
-            })
-        }
-    },
+            return errorResponse(res, error, 'Register')
+            }
+        },
     login: async (req, res) => {
         try {
             return res.status(201).json({
@@ -31,11 +28,7 @@ module.exports = {
                 msg: 'Usuario logeado'
             })
         } catch (error) {
-            console.log(error);
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'Upss, hubo un error'
-            })
+            return errorResponse(res, error, 'Login')
         }
     },
     checked:  async (req, res) => {
@@ -45,11 +38,7 @@ module.exports = {
                 msg: 'Usuario checkeado'
             })
         } catch (error) {
-            console.log(error);
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'Upss, hubo un error'
-            })
+            return errorResponse(res, error, 'Checked')
         }
     },
     sendToken:  async (req, res) => {
@@ -59,11 +48,7 @@ module.exports = {
                 msg: 'Token enviado'
             })
         } catch (error) {
-            console.log(error);
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'Upss, hubo un error'
-            })
+            return errorResponse(res, error, 'SendToken')
         }
     },
     verifyToken:  async (req, res) => {
@@ -73,11 +58,7 @@ module.exports = {
                 msg: 'Token verificado'
             })
         } catch (error) {
-            console.log(error);
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'Upss, hubo un error'
-            })
+            return errorResponse(res, error, 'VerifyToken')
         }
     },
     changePassword:  async (req, res) => {
@@ -87,11 +68,7 @@ module.exports = {
                 msg: 'Password actualizado'
             })
         } catch (error) {
-            console.log(error);
-            return res.status(error.status || 500).json({
-                ok: false,
-                msg: error.message || 'Upss, hubo un error'
-            })
+            return errorResponse(res, error, 'ChangePassword')
         }
     }
 }

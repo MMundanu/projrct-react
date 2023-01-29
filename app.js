@@ -12,7 +12,16 @@ var projectsRouter = require('./routes/projects')
 var taskRouter = require('./routes/task')
 const connectDB = require('./database/config')
 
+const bodyParser = require('body-parser');
+
+
 var app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 connectDB()
 

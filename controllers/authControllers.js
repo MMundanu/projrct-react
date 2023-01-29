@@ -1,20 +1,15 @@
-const createError = require('http-errors');
+let createError = require('http-errors');
 
 
 module.exports = {
     register: async (req, res) => {
         try {
 
-             //const {name, email, password} = req.body;
-
-            const form = {
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password
-            }
-
-            if([form.name, form.email, form.password].includes("")){
-                throw createError = (400, 'Todos ls datos son obligatorios');                
+             const {name, email, password} = req.body;
+             
+    
+            if([name, email, password].includes("")){
+                throw createError = (400, 'Todos los datos son obligatorios');                
             };
 
             return res.status(201).json({
@@ -25,7 +20,7 @@ module.exports = {
             console.log(error);
             return res.status(error.status || 500).json({
                 ok: false,
-                msg: error.message || 'Upss, hubo un error'
+                msg: error || 'Upss, hubo un error'
             })
         }
     },

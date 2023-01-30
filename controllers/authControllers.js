@@ -7,6 +7,7 @@ const generatedJsonToken = require('../helpers/generatedJsonToken');
 
 module.exports = {
     register: async (req, res) => {
+
         try {
 
              const {name, email, password} = req.body;
@@ -87,20 +88,55 @@ module.exports = {
         }
     },
     checked:  async (req, res) => {
+        const {token} = req.query;
+
         try {
+
+            if(!token){
+                throw createError(400, 'Token inexistentes');                
+            };
+
+            const user = await User.findOne({
+                token
+            })
+
+            if(!user){
+                throw createError(400, 'Token invalido');                
+            };
+
+            user.checked = true;
+            user.token = ''
+
+            await user.save()
+
             return res.status(201).json({
                 ok: true,
-                msg: 'Usuario checkeado'
+                msg: 'Registro completado exitosamente'
             })
         } catch (error) {
             return errorResponse(res, error, 'Checked')
         }
     },
     sendToken:  async (req, res) => {
+
+        const {email} = req.body
         try {
+
+            let user = await User.findOne({
+                email
+            })
+
+            if(!user) throw createError(400, 'email incorrecto');
+
+            user.token = generatedToken();
+             await user.save()
+
+             //ToDo: Enviar email para reestablecer la contraseña
+
+
             return res.status(200).json({
                 ok: true,
-                msg: 'Token enviado'
+                msg: 'Se ha enviado un mail con las instucciones'
             })
         } catch (error) {
             return errorResponse(res, error, 'SendToken')

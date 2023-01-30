@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {hash, compare} = require('bycrypts.js')
+const {hash, compare} = require('bcryptjs')
 
 
 const userSchema = new mongoose.Schema({
@@ -38,8 +38,8 @@ userSchema.pre('save', async function(next){
     this.password = await hash(this.password, 10)
 })
 
-userSchema.method.checkedPassword = async function(password){
-    return await compare(password, this.password)
-}
+userSchema.methods.checkedPassword = async function(password){
+    return await compare(password, this.password);
+};
 
 module.exports = mongoose.model('User', userSchema)

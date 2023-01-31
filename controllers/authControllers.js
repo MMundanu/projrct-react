@@ -3,6 +3,7 @@ const errorResponse = require('../helpers/errorResponse');
 const User = require('../database/models/user');
 const generatedToken = require('../helpers/generatedToken');
 const generatedJsonToken = require('../helpers/generatedJsonToken');
+const { confirmRegister } = require('../helpers/sendMail');
 
 
 module.exports = {
@@ -26,15 +27,22 @@ module.exports = {
                 throw createError = (400, 'El email ya se encuentra registrado');                
             }
 
+            const token = generatedToken();
+
             user = new User(req.body);
-            user.token = generatedToken();
+            user.token = token;
 
            //console.log('-------------------------------', user);
 
 
            const userStore = await user.save()
 
-           //Enviar el mail de confirmación 
+           
+           confirmRegister({
+                name:userStore.name,
+                email: userStore.email,
+                token: userStore.token
+           })
 
             return res.status(201).json({
                 ok: true,
@@ -104,7 +112,7 @@ module.exports = {
                 throw createError(400, 'Token invalido');                
             };
 
-            user.checked = true;
+            user.cheked = true;
             user.token = ''
 
             await user.save()
@@ -133,6 +141,7 @@ module.exports = {
 
              //ToDo: Enviar email para reestablecer la contraseña
 
+             
 
             return res.status(200).json({
                 ok: true,

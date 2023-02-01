@@ -3,7 +3,7 @@ const errorResponse = require('../helpers/errorResponse');
 const User = require('../database/models/user');
 const generatedToken = require('../helpers/generatedToken');
 const generatedJsonToken = require('../helpers/generatedJsonToken');
-const { confirmRegister } = require('../helpers/sendMail');
+const { confirmRegister, forgetPassword } = require('../helpers/sendMail');
 
 
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
            const userStore = await user.save()
 
            
-           confirmRegister({
+           await confirmRegister({
                 name:userStore.name,
                 email: userStore.email,
                 token: userStore.token
@@ -71,7 +71,7 @@ module.exports = {
                 throw createError(404, 'Credenciales invalidas | email');                
             }
 
-            if(!user.cheked){
+            if(!user.checked){
                 throw createError(403, 'Tu cuentano no ha sido confirmada');                
             }
 
@@ -112,7 +112,7 @@ module.exports = {
                 throw createError(400, 'Token invalido');                
             };
 
-            user.cheked = true;
+            user.checked = true;
             user.token = ''
 
             await user.save()
@@ -134,13 +134,20 @@ module.exports = {
                 email
             })
 
-            if(!user) throw createError(400, 'email incorrecto');
+            if(!user) throw createError(400, 'el email no se encuentra registrado');
 
-            user.token = generatedToken();
+            const token = generatedToken();
+            user.token = token;
              await user.save()
 
              //ToDo: Enviar email para reestablecer la contraseña
 
+               
+           await forgetPassword({
+            name:user.name,
+            email: user.email,
+            token: user.token
+       })
              
 
             return res.status(200).json({
@@ -153,6 +160,18 @@ module.exports = {
     },
     verifyToken:  async (req, res) => {
         try {
+
+            const {token} = req.query;
+
+            if(!token) throw createError(400, 'No hay token en la petición')
+
+            const user = await User.findOne({
+                token
+            })
+
+            if(!user) throw createError(400, 'Token invalido')
+
+
             return res.status(200).json({
                 ok: true,
                 msg: 'Token verificado'
@@ -163,6 +182,22 @@ module.exports = {
     },
     changePassword:  async (req, res) => {
         try {
+
+            const {token} = req.query;
+
+            const {password} = req.body;
+
+            if(!password) throw createError(404, 'El password es obligatorio')
+
+            const user = await User.findOne({
+                token
+            })
+
+            user.password = password;
+            user.token= ''
+
+            user.save()
+
             return res.status(200).json({
                 ok: true,
                 msg: 'Password actualizado'

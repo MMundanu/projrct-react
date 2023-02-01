@@ -1,9 +1,9 @@
-
+import { Link } from "react-router-dom"
 
 export const Login = () => {
   return (
     <div>
-        <h1>Icinia session</h1>
+        <h1>Inicia session</h1>
 
         <form action="">
 
@@ -28,12 +28,12 @@ export const Login = () => {
             </div>
         </form>
         <nav>
-            <link to={'/register'}>
+            <Link to={'/register'}>
                 ¿No teiens unas cuenta? Registrate
-            </link>
-            <link to={'/forget-password'}>
+            </Link>
+            <Link to={'/forget-password'}>
                 Olvide mi contraseña
-            </link>
+            </Link>
         </nav>
     </div>
   )

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 export const ForgetPassword = () => {
   return (
@@ -23,12 +24,12 @@ export const ForgetPassword = () => {
         
     </form>
     <nav>
-    <link to={'/register'}>
+    <Link to={'/register'}>
             ¿No tienes cunta? Registrate
-        </link>
-        <link to={'/'}>
+        </Link>
+        <Link to={'/'}>
             ¿Estas registrado? Inicia session
-        </link>
+        </Link>
     </nav></div>
   )
 }

@@ -1,10 +1,11 @@
+import { Outlet } from "react-router-dom"
 
-export const AuthLatouts = () => {
+export const AuthLayouts = () => {
   return (
     <div>
         <main>
             <div>
-                oulet
+                <Outlet />
             </div>
         </main>
     </div>

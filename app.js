@@ -17,6 +17,25 @@ const bodyParser = require('body-parser');
 
 var app = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", `${process.env.URL_FRONT}`);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+// const cors = require('cors')
+
+// const whiteList = ['http://localhost:3000']
+// const corsOption = {
+//   origin : function(origin, cb){
+//     if(whiteList.includes(origin)){
+//       cb(null, true)
+//     }else{
+//       cb(new Error('Error de Cars'))
+//     }
+//   }
+// }
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -31,11 +50,11 @@ app
   .use('/api/projects', projectsRouter)
   .use('/api/tasks', taskRouter)
 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-
+// app.use(cors(corsOption))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

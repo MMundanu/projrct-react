@@ -47,7 +47,7 @@ module.exports = {
             return res.status(201).json({
                 ok: true,
                 msg: 'Usuario registrado',
-                data: userStore
+                user: userStore
             })
         } catch (error) {
             return errorResponse(res, error, 'Register')

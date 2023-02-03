@@ -3,12 +3,15 @@ import { Alert } from "../components/Alert";
 import { useForm } from "../hooks/useForm"
 import { useState } from "react";
 import { clientAxios } from "../config/clientAxios";
+import {Swal} from 'sweetalert2'
 
 const exRegEmail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
 export const Register = () => {
 
     const [alert, setAlert] = useState({});
+
+    const [send, setSend] = useState(false);
 
     const {formValues, setformValues, handleInputChange, reset} = useForm({
         name: "",
@@ -37,6 +40,8 @@ export const Register = () => {
             return null
         };
         try {
+
+            setSend(true)
             
             const {data} = await clientAxios.post('/auth/register',{
                 name,
@@ -46,9 +51,20 @@ export const Register = () => {
 
             console.log(data);
 
+            setSend(false)
+
+            Swal.fire({
+                icon: 'info',
+                title: 'Gracias por registrarte',
+                text: data.msg,
+              });
+
+              reset()
 
         } catch (error) {
             console.log(error);
+            handleShowAlert(error.response.data.msg)
+            reset()
         }
         
     }
@@ -59,7 +75,7 @@ export const Register = () => {
         });
         setTimeout(() => {
             setAlert({})
-        }, 2000)
+        }, 3000)
     }
 
   return (
@@ -117,7 +133,10 @@ export const Register = () => {
             onChange={handleInputChange}
             />
         </div>
-            <button type="submit" >
+            <button 
+            type="submit"
+            disabled={send}
+            >
                 Crear cuenta
             </button>
         

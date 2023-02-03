@@ -46,7 +46,7 @@ module.exports = {
 
             return res.status(201).json({
                 ok: true,
-                msg: 'Usuario registrado',
+                msg: 'Te enviamos un email para confirmar tu registración',
                 user: userStore
             })
         } catch (error) {

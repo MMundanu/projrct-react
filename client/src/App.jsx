@@ -33,7 +33,7 @@ function App() {
             element={<RecoverPassword/>}
           />
           <Route
-            path='confirm/:token'
+            path='checked/:token'
             element={<ConfirmAccount/>}
           />
            <Route

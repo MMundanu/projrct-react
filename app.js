@@ -70,8 +70,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500).json({
     ok: false,
-    meg: message.error ? message.error : 'upss, hubo un error'
-  })
+    msg: message.error ? message.error : 'upss, hubo un error'  })
 });
 
 module.exports = app;

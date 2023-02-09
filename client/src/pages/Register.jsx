@@ -3,7 +3,7 @@ import { Alert } from "../components/Alert";
 import { useForm } from "../hooks/useForm"
 import { useState } from "react";
 import { clientAxios } from "../config/clientAxios";
-import {Swal} from 'sweetalert2'
+import Swal from 'sweetalert2'
 
 const exRegEmail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
@@ -63,7 +63,7 @@ export const Register = () => {
 
         } catch (error) {
             console.log(error);
-            handleShowAlert(error.response.data.msg)
+            handleShowAlert(error.response?.data.msg)
             reset()
         }
         

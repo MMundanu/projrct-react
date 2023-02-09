@@ -101,7 +101,7 @@ module.exports = {
         try {
 
             if(!token){
-                throw createError(400, 'Token inexistentes');                
+                throw createError(400, 'Token inexistente');                
             };
 
             const user = await User.findOne({

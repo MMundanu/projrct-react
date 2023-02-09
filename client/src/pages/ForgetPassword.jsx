@@ -49,6 +49,7 @@ export const ForgetPassword = () => {
             setAlert({})
         }, 3000)
     }
+    
 
 
   return (

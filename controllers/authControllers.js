@@ -193,6 +193,9 @@ module.exports = {
                 token
             })
 
+            if(!user) throw createError(400, 'El token es invalido')
+
+
             user.password = password;
             user.token= ''
 

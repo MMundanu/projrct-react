@@ -39,7 +39,7 @@ module.exports = {
                 subject: 'Reestablece tu contraseña',
                 text: 'Reestablece tu contraseña en Project Manager',
                 html: `<p>Hola ${name}, hace click en el siguiente enlace para
-                <a href='${process.env.URL_FRONT}/reset-password/${token}' >reestablecer tu cuenta</a><p/>`
+                <a href='${process.env.URL_FRONT}/recover-password/${token}' >reestablecer tu cuenta</a><p/>`
             })
         } catch (error) {
             console.log(error);

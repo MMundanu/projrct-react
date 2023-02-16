@@ -17,24 +17,24 @@ const bodyParser = require('body-parser');
 
 var app = express();
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", `${process.env.URL_FRONT}`);
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", `${process.env.URL_FRONT}`);
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
-// const cors = require('cors')
+const cors = require('cors')
 
-// const whiteList = ['http://localhost:3000']
-// const corsOption = {
-//   origin : function(origin, cb){
-//     if(whiteList.includes(origin)){
-//       cb(null, true)
-//     }else{
-//       cb(new Error('Error de Cars'))
-//     }
-//   }
-// }
+const whiteList = [`${process.env.URL_FRONT}`]
+const corsOption = {
+  origin : function(origin, cb){
+    if(whiteList.includes(origin)){
+      cb(null, true)
+    }else{
+      cb(new Error('Error de Cors'))
+    }
+  }
+}
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -43,6 +43,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 connectDB()
+app.use(cors(corsOption))
+
 
 app
   .use('/api/auth', authRouter)
@@ -54,8 +56,7 @@ app
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cors(corsOption))
-
+// 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -70,7 +71,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500).json({
     ok: false,
-    msg: message.error ? message.error : 'upss, hubo un error'  })
+    msg: err.message ? err.message : 'upss, hubo un error'  })
 });
 
 module.exports = app;

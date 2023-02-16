@@ -1,8 +1,9 @@
-module.exports = (res, error) => {
-    console.log(error);
+module.exports = (res, error, method) => {
+    console.error(error);
 
     return res.status(error.status || 500).json({
         ok: false,
-        msg: error || `Upss, hubo un error ${method}` 
-    })
-}
+        msg: error.message || `Ups, hubo un error en el método ${method}`
+    });
+};
+

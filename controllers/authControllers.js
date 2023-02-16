@@ -1,4 +1,4 @@
-let createError = require('http-errors');
+const createError = require('http-errors');
 const errorResponse = require('../helpers/errorResponse');
 const User = require('../database/models/user');
 const generatedToken = require('../helpers/generatedToken');
@@ -68,7 +68,7 @@ module.exports = {
             })
 
             if(!user){
-                throw createError(404, 'Credenciales invalidas | email');                
+                throw createError(404, 'Credenciales invalidas');                
             }
 
             if(!user.checked){
@@ -76,7 +76,7 @@ module.exports = {
             }
 
             if(!await user.checkedPassword(password)){
-                throw createError(403,"Credenciales inválidas | PASSWORD");
+                throw createError(403,"Credenciales inválidas");
             }
             
 
@@ -85,11 +85,11 @@ module.exports = {
                 msg: 'Usuario logeado',
                 user: {
                     nombre: user.name,
-                    email: user.email,
-                    token: generatedJsonToken({
-                        id: user._id
-                    })
-                }
+                    _id: user._id
+                },
+                token: generatedJsonToken({
+                    id: user._id
+                })
             })
         } catch (error) {
             return errorResponse(res, error, 'Login')

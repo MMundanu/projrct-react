@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-const {hash, compare} = require('bycrypts.js')
-
 
 const projectSchema = new mongoose.Schema({
     name : {
@@ -9,7 +7,7 @@ const projectSchema = new mongoose.Schema({
         trim : true
     },
     description : {
-        type: Date,
+        type: String,
         required : true,
         trim : true
     },

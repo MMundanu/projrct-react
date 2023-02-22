@@ -8,11 +8,14 @@ export const AuthProvider = ({children}) => {
 
     const [auth, setAuth] = useState({});
     const [loading, setLoading] = useState(true); 
+
+
     useEffect(() => {
      
       const authUser = async () => {
         const token = sessionStorage.getItem('token')
         if(!token){
+          setLoading(false)
           return null
         }
 
@@ -29,13 +32,15 @@ export const AuthProvider = ({children}) => {
           //console.log(data);
 
           setAuth(data.user)
+
+          setLoading(false)
           
         } catch (error) {
           console.log(error);
+          sessionStorage.removeItem('token')
           setAuth({})
-        } finally{
           setLoading(false)
-        }
+        } 
       }
       authUser()
 

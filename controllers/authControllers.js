@@ -84,7 +84,7 @@ module.exports = {
                 ok: true,
                 msg: 'Usuario logeado',
                 user: {
-                    nombre: user.name,
+                    name: user.name,
                     _id: user._id
                 },
                 token: generatedJsonToken({

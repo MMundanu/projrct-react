@@ -5,14 +5,11 @@ export const ProtectedLayauts = () => {
 
     const {auth, loading} = useAuth()
 
-    {
+    
         if(loading){
-           return (
-                <p>Cargando...</p>
-            )
+           return <p>Cargando...</p> 
         }
-    }
-
+    
   return (
     <div>
         {

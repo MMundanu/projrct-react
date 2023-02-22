@@ -54,7 +54,7 @@ export const Login = () => {
             
         } catch (error) {
             console.log(error);
-            handleShowAlert(error.response?.data.msg.message)
+            handleShowAlert(error.response?.data.msg)
         }
     }
 

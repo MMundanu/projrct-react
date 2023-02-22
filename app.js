@@ -23,7 +23,8 @@ var app = express();
 //   next();
 // });
 
-const cors = require('cors')
+const cors = require('cors');
+const checkToken = require('./middleware/checkToken');
 
 const whiteList = [`${process.env.URL_FRONT}`]
 const corsOption = {
@@ -43,13 +44,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 connectDB()
-app.use(cors(corsOption))
+app.use(cors())
 
 
 app
   .use('/api/auth', authRouter)
   .use('/api/users', usersRouter)
-  .use('/api/projects', projectsRouter)
+  .use('/api/projects',checkToken, projectsRouter)
   .use('/api/tasks', taskRouter)
 
 

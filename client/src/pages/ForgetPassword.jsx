@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom"
 import Swal from "sweetalert2";
 import { Alert } from "../components/Alert";
@@ -53,42 +54,38 @@ export const ForgetPassword = () => {
 
 
   return (
-    <div>       
+    <div className="m-auto py-3 d-flex flex-column text-center border rounded w-50"  >
+        
     <h1>Recupera tu acceso</h1>
-    {
-        alert.msg && <Alert {...alert}/>
-    }
 
-    <form action="" 
-    onSubmit={handleSubmit}
-    noValidate
-    >
+        {
+            alert.msg && <Alert {...alert}/>
+        }
 
-    
-
-        <div>
-            <label htmlFor="email">Correo Electronico</label>
-            <input 
-            type="email"
-            id="email"
-            placeholder="Ingrese su email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            />
-        </div>
-        
-            <button type="submit">
-                Recuper contraseña
-            </button>
-        
-    </form>
-    <nav>
-    <Link to={'/register'}>
+        <Form onSubmit={handleSubmit} noValidate className='m-auto mb-3'>
+      <Form.Group className="mb-3" >
+        <Form.Label htmlFor="email" >Correo Electronico</Form.Label>
+        <Form.Control 
+      type="email"
+      id="email"
+      placeholder="Ingrese su email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+        />
+      </Form.Group>
+  
+      <Button variant="primary" type="submit">
+       Recuper contraseña
+      </Button>
+    </Form>
+        <nav className="d-flex flex-column" >
+           <Link to={'/register'}>
             ¿No tienes cunta? Registrate
-        </Link>
-        <Link to={'/'}>
-            ¿Estas registrado? Inicia session
-        </Link>
-    </nav></div>
+           </Link>
+           <Link to={'/'}>
+          ¿Estas registrado? Inicia session
+           </Link>
+        </nav>
+    </div>
   )
 }

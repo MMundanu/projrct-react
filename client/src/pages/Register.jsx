@@ -4,6 +4,7 @@ import { useForm } from "../hooks/useForm"
 import { useState } from "react";
 import { clientAxios } from "../config/clientAxios";
 import Swal from 'sweetalert2'
+import { Button, Form } from "react-bootstrap";
 
 const exRegEmail = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
@@ -79,73 +80,80 @@ export const Register = () => {
     }
 
   return (
-    <div>        
-    <h1>Crea tu cuenta</h1>
-    {
-        alert.msg && <Alert {...alert} />
-    }
-
-    <form action="" onSubmit={handleSubmit} noValidate>
-
-    <div>
-            <label htmlFor="name">Nombre</label>
-            <input 
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Ingrese su nombre"
-            autoComplete="off"
-            value={name}
-            onChange={handleInputChange}
-            />
-        </div>
-
-        <div>
-            <label htmlFor="email">Correo Electronico</label>
-            <input 
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Ingrese su email"
-            value={email}
-            onChange={handleInputChange}
-            />
-        </div>
-        <div>
-            <label htmlFor="passwors">Contraseña</label>
-            <input 
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Ingrese su contraseña"
-            value={password}
-            onChange={handleInputChange}
-            />
-        </div>
-        <div>
-            <label htmlFor="passwors2">Confirme su Contraseña</label>
-            <input 
-            type="password"
-            id="password2"
-            name="password2"
-            placeholder="Ingrese su contraseña"
-            value={password2}
-            onChange={handleInputChange}
-            />
-        </div>
-            <button 
-            type="submit"
-            disabled={send}
-            >
-                Crear cuenta
-            </button>
+    
+    
+    <div className="m-auto py-3 d-flex flex-column text-center border rounded w-50"  >
         
-    </form>
+        <h1>Crea tu cuenta</h1>
+
+        {
+            alert.msg && <Alert {...alert}/>
+        }
+
+        <Form onSubmit={handleSubmit} className='m-auto mb-3'>
+
+        <Form.Group className="mb-3" >
+        <Form.Label htmlFor="name" >Nombre</Form.Label>
+        <Form.Control 
+       type="text"
+       id="name"
+       name="name"
+       placeholder="Ingrese su nombre"
+       autoComplete="off"
+       value={name}
+       onChange={handleInputChange}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" >
+        <Form.Label htmlFor="email" >Correo Electronico</Form.Label>
+        <Form.Control 
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Ingrese su email"
+        value={email}
+        onChange={handleInputChange}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="password" >Password</Form.Label>
+        <Form.Control 
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Ingrese su contraseña"
+          value={password}
+          onChange={handleInputChange}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="password2" >Confirme su Contraseña</Form.Label>
+        <Form.Control 
+          type="password"
+          id="password2"
+          name="password2"
+          placeholder="Ingrese su contraseña"
+          value={password2}
+          onChange={handleInputChange}
+        />
+      </Form.Group>
+      
+      <Button variant="primary"  
+         type="submit"
+         disabled={send}
+        >
+            Crear cuenta
+      </Button>
+    </Form>
     <nav>
         <Link to={'/'}>
             ¿Estas registrado? Inicia session
         </Link>
     </nav>
     </div>
+
   )
 }

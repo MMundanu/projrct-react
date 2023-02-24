@@ -1,4 +1,4 @@
-import { Button, Col, Form } from "react-bootstrap"
+import { Button, Form } from "react-bootstrap"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Alert } from "../components/Alert"
@@ -62,7 +62,7 @@ export const Login = () => {
 
 
   return (
-    <div /*className="m-auto d-flex flex-column"*/ >
+    <div className="m-auto py-3 d-flex flex-column text-center border rounded w-50"  >
         
         <h1>Inicia session</h1>
 
@@ -70,38 +70,8 @@ export const Login = () => {
             alert.msg && <Alert {...alert}/>
         }
 
-        <form 
-        onSubmit={handleSubmit}
-        >
-
-            <div>
-                <label htmlFor="email">Correo Electronico</label>
-                <input 
-                type="email"
-                id="email"
-                placeholder="Ingrese su email"
-                name="email"
-                value={email}
-                onChange={handleInputChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="passwors">Password</label>
-                <input 
-                type="password"
-                id="password"
-                placeholder="Ingrese su contraseña"
-                name="password"
-                value={password}
-                onChange={handleInputChange}
-                />
-                <Button type="submit">
-                    Iniciar session
-                </Button>
-            </div>
-        </form>
-        <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form onSubmit={handleSubmit} className='m-auto mb-3'>
+      <Form.Group className="mb-3" >
         <Form.Label htmlFor="email" >Correo Electronico</Form.Label>
         <Form.Control 
        type="email"
@@ -113,7 +83,7 @@ export const Login = () => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3">
         <Form.Label htmlFor="password" >Password</Form.Label>
         <Form.Control 
           type="password"
@@ -129,7 +99,7 @@ export const Login = () => {
         Iniciar sesion
       </Button>
     </Form>
-        <nav>
+        <nav className="d-flex flex-column" >
             <Link to={'/register'}>
                 ¿No teiens unas cuenta? Registrate
             </Link>

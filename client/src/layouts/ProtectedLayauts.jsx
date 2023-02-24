@@ -1,4 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom"
+import { Header } from "../components/Header"
+import { SideBar } from "../components/SideBar"
 import useAuth from "../hooks/useAuth"
 
 export const ProtectedLayauts = () => {
@@ -13,9 +15,17 @@ export const ProtectedLayauts = () => {
   return (
     <div>
         {
-            auth._id? (<main>
+            auth._id? (
+            <div>
+              <Header />
+              <div>
+                <SideBar />
+                <main>
                 <Outlet/>
-             </main>)
+                </main>
+              </div>
+            </div>
+            )
              :
              (
                 <Navigate to='/'/>

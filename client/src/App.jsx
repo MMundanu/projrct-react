@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import { AuthProvider } from './context/AuthProvider'
 import { AuthLayouts } from './layouts/AuthLayouts'
@@ -5,9 +6,13 @@ import { ProtectedLayauts } from './layouts/ProtectedLayauts'
 import { ConfirmAccount } from './pages/ConfirmAccount'
 import { ForgetPassword } from './pages/ForgetPassword'
 import { Login } from './pages/Login'
+import { Project } from './pages/Project'
+import { ProjectAdd } from './pages/ProjectAdd'
+import { ProjectEdit } from './pages/ProjectEdit'
 import { Projetcs } from './pages/Projetcs'
 import { RecoverPassword } from './pages/RecoverPassword'
 import { Register } from './pages/Register'
+
 
 function App() {
 
@@ -52,6 +57,15 @@ function App() {
           <Route
           index
           element={<Projetcs/>}
+          />
+          <Route
+          path='create-project' element={<ProjectAdd />}
+          />
+          <Route
+          path='edit-project/:id' element={<ProjectEdit/>}
+          />
+          <Route
+          path=':id' element={<Project/>}
           />
 
         </Route>

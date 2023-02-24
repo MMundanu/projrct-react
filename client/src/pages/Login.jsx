@@ -1,5 +1,6 @@
+import { Button, Col, Form } from "react-bootstrap"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Alert } from "../components/Alert"
 import { clientAxios } from "../config/clientAxios"
 import useAuth from "../hooks/useAuth"
@@ -9,6 +10,7 @@ export const Login = () => {
 
     const [alert, setAlert] = useState({})
     const {setAuth} = useAuth();
+    const navigate = useNavigate();
 
 
     const handleShowAlert = (msg, time = true) => {
@@ -50,7 +52,7 @@ export const Login = () => {
 
             sessionStorage.setItem('token', data.token);
 
-            
+            navigate('/projects')
             
         } catch (error) {
             console.log(error);
@@ -60,7 +62,8 @@ export const Login = () => {
 
 
   return (
-    <div>
+    <div /*className="m-auto d-flex flex-column"*/ >
+        
         <h1>Inicia session</h1>
 
         {
@@ -92,11 +95,40 @@ export const Login = () => {
                 value={password}
                 onChange={handleInputChange}
                 />
-                <button type="submit">
+                <Button type="submit">
                     Iniciar session
-                </button>
+                </Button>
             </div>
         </form>
+        <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label htmlFor="email" >Correo Electronico</Form.Label>
+        <Form.Control 
+       type="email"
+       id="email"
+       placeholder="Ingrese su email"
+       name="email"
+       value={email}
+       onChange={handleInputChange} 
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label htmlFor="password" >Password</Form.Label>
+        <Form.Control 
+          type="password"
+          id="password"
+          placeholder="Ingrese su contraseña"
+          name="password"
+          value={password}
+          onChange={handleInputChange}
+        />
+      </Form.Group>
+      
+      <Button variant="primary" type="submit">
+        Iniciar sesion
+      </Button>
+    </Form>
         <nav>
             <Link to={'/register'}>
                 ¿No teiens unas cuenta? Registrate

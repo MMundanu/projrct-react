@@ -62,7 +62,7 @@ export const Login = () => {
 
 
   return (
-    <div className="m-auto py-3 d-flex flex-column text-center border rounded w-50"  >
+    <div className="m-auto py-3 d-flex flex-column align-items-center text-center border rounded w-50 h-100"  >
         
         <h1>Inicia session</h1>
 

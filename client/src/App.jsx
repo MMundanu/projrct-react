@@ -12,6 +12,7 @@ import { ProjectEdit } from './pages/ProjectEdit'
 import { Projetcs } from './pages/Projetcs'
 import { RecoverPassword } from './pages/RecoverPassword'
 import { Register } from './pages/Register'
+import './App.css';
 
 
 function App() {

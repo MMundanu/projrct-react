@@ -1,6 +1,11 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { Collaborator } from '../components/Collaborator'
 import { Task } from '../components/Task'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+//import {} from '@fortawesome/free-solid-svg-icons'
+
 
 export const Project = () => {
   return (
@@ -15,7 +20,7 @@ export const Project = () => {
     <div>
       <p>Tareas del proyecto</p>
       <div>
-        {/* dibujo */}
+      <FontAwesomeIcon icon="fa-duotone fa-plus" />
         <p>
           Nueva tarea
         </p>
@@ -24,6 +29,22 @@ export const Project = () => {
     {
       [1,2].map(task => (
         <Task/>
+      ))
+    }
+
+    <div>
+      <p>Colaboradores</p>
+
+      <Button>
+        <p>
+          Agregar colaborador
+        </p>
+      </Button>
+    </div>
+
+    {
+      [1,2].map(collaborator => (
+        <Collaborator />
       ))
     }
 

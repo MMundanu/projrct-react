@@ -1,32 +1,33 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
 export const Task = () => {
   return (
-    <div>
+    <div className='w-100 p-2 d-flex flex-wrap justify-content-between mx-2 my-2 border border-1 rounded align-items-center ' >
         <div>
-            <p>Tarea</p>
-            <p>Descripcion</p>
-            <p>Fecha de entrega</p>
-            <p>Prioridad</p>
+            <p className='fs-5' >Tarea</p>
+            <p className='fs-6'>Descripcion</p>
+            <p className='fs-5'>Fecha de entrega</p>
+            <p className='fs-6'>Prioridad</p>
         </div>
         <div>
-            <button>
+            <Button className='bg-success mx-1' >
                 Editar
-            </button>
+            </Button>
             {
                 false ? (
-                    <button>
+                    <Button className='bg-info'>
                         Completa
-                    </button>
+                    </Button>
                 ):(
-                    <button>
+                    <Button className='bg-info' >
                         Incompleta 
-                    </button>
+                    </Button>
                 )
             }
-            <button>
+            <Button className='bg-danger mx-1'>
                 Eliminar 
-            </button>
+            </Button>
         </div>
     </div>
   )

@@ -13,14 +13,16 @@ export const ProtectedLayauts = () => {
         }
     
   return (
-    <div>
+    <div className="d-flex flex-wrap" >
         {
             auth._id? (
-            <div>
+            <div className="w-100" >
               <Header />
-              <div>
+              <div className="d-flex flex-wrap h-100">
+                <div className="w-25" >
                 <SideBar />
-                <main>
+                </div>
+                <main className="w-75">
                 <Outlet/>
                 </main>
               </div>

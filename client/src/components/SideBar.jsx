@@ -8,7 +8,7 @@ export const SideBar = () => {
            Hola:  {/* {auth.name} */}
         </p>
         <Link
-        to={'/create-project'}
+        to={'/projects/create-project'}
         >
             Nuevo Proyecto
         </Link>

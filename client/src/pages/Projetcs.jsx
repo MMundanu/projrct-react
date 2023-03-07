@@ -22,7 +22,7 @@ export const Projetcs = () => {
         :
         projects.length
         ?
-        projects.map((project, i) => <ProjectPreview key={project + i} {...project} />)
+        projects.map((project, i) => <ProjectPreview key={project._id} {...project} />)
         :
         <p>No hay proyectos agregados</p>
       }

@@ -95,24 +95,81 @@ export const ProjectsProvider = ({children}) => {
             const token = sessionStorage.getItem('token')
             if(!token) return null
 
-            const {data} = await clientAxios.post(`/projects/`, project,{
-                headers : {
-                    "Content-Type" : "application/json",
-                    Authorization : token
-                }
-            });
-            setProjects([...projects, data.project])
+            if(project.id){
 
-            Toast.fire({
-                icon: 'success',
-                title: data.msg
-            })
+                const {data} = await clientAxios.put(`/projects/${project.id}`, project,{
+                    headers : {
+                        "Content-Type" : "application/json",
+                        Authorization : token
+                    }
+                });
+                const projectsUpdated = projects.map(projectState => {
+                    if(projectState._id === data.project._id){
+                        return data.project
+                    }
+                    return projectState
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: data.msg
+                })
+
+                setProjects(projectsUpdated)
+
+                
+            } else {
+                const {data} = await clientAxios.post(`/projects/`, project,{
+                    headers : {
+                        "Content-Type" : "application/json",
+                        Authorization : token
+                    }
+                });
+                setProjects([...projects, data.project])
+    
+                Toast.fire({
+                    icon: 'success',
+                    title: data.msg
+                })
+            }
             navigate('projects')
             
         } catch (error) {
             console.log(error);
 
             showAlert(error.response ? error.response.data.msg : 'Ups, hubo un error', false)
+        }
+    }
+
+    const deleteProject = async (id) => {
+        try {
+            const token = sessionStorage.getItem('token')
+            if(!token) return null
+
+            const {data} = await clientAxios.delete(`/projects/${id}`,{
+                headers : {
+                    "Content-Type" : "application/json",
+                    Authorization : token
+                }
+            });
+
+            const projectsFiltered = projects.filter(project => project._id !== id)
+
+            setProject(projectsFiltered)
+
+            Toast.fire({
+                icon: 'success',
+                title: data.msg
+            })
+
+            navigate('projects')
+
+            
+        } catch (error) {
+            console.log(error);
+
+            showAlert(error.response ? error.response.data.msg : 'Ups, hubo un error', false)
+            
         }
     }
   
@@ -126,7 +183,8 @@ export const ProjectsProvider = ({children}) => {
         getProjects,
         project,
         getProject,
-        storeProject
+        storeProject,
+        deleteProject
     }}
     >
         {children}

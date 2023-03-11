@@ -5,6 +5,7 @@ import { Collaborator } from '../components/Collaborator'
 import { Task } from '../components/Task'
 import useProjects from '../hooks/useProjects'
 import { Alert } from '../components/Alert'
+import { ModalFormTask } from '../components/ModalFormTask'
 //import {} from '@fortawesome/free-solid-svg-icons'
 
 
@@ -43,7 +44,7 @@ export const Project = () => {
       <div>
       
         <p>
-          Nueva tarea
+          <ModalFormTask />
         </p>
       </div>
     </div>

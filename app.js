@@ -51,7 +51,7 @@ app
   .use('/api/auth', authRouter)
   .use('/api/users', usersRouter)
   .use('/api/projects',checkToken, projectsRouter)
-  .use('/api/tasks', taskRouter)
+  .use('/api/tasks',checkToken, taskRouter)
 
 
 app.use(logger('dev'));

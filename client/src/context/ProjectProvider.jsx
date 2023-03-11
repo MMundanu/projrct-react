@@ -25,6 +25,9 @@ export const ProjectsProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [project, setProject] = useState({});
     const navigate = useNavigate()
+
+    const [showModal, setShowModal] = useState(false);
+    const [alertModal, setAlertModal] = useState({})
     
     const showAlert = (msg, time = true) => {
         setAlert({
@@ -172,6 +175,54 @@ export const ProjectsProvider = ({children}) => {
             
         }
     }
+
+    const handleShowModal = () => {
+        setShowModal(!showModal)
+    }
+
+    const showAlertModal = (msg, time = true) => {
+        setAlertModal({
+        msg,
+        });
+        if (time) {
+        setTimeout(() => {
+        setAlertModal({});
+        }, 3000);
+        }
+        };
+
+    const storeTask = async (task) => {
+        try {
+            const token = sessionStorage.getItem('token')
+            if(!token) return null
+
+            task.project = project._id;
+
+            const {data} = await clientAxios.post(`/tasks`, task,{
+                headers : {
+                    "Content-Type" : "application/json",
+                    Authorization : token
+                }
+            });
+            console.log(data);
+            project.tasks = [...project.tasks, data.task];
+            setProject(project)
+
+            setShowModal(false)
+
+            Toast.fire({
+                icon: 'success',
+                title: data.msg
+            })
+
+            setAlert({})
+
+            
+        } catch (error) {
+            console.log(error);
+            showAlertModal(error.response ? error.response.data.msg : "Upss, hubo un error", false);
+        }
+    }
   
     return (
     <ProjectsContext.Provider
@@ -184,7 +235,12 @@ export const ProjectsProvider = ({children}) => {
         project,
         getProject,
         storeProject,
-        deleteProject
+        deleteProject,
+        handleShowModal,
+        showAlertModal,
+        showModal,
+        alertModal,
+        storeTask
     }}
     >
         {children}

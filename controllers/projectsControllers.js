@@ -65,7 +65,7 @@ module.exports = {
 
             if(!ObjectId.isValid(id)) throw createError(400, 'No es un id valido')
 
-            const project = await Project.findById(id)
+            const project = await Project.findById(id).populate('tasks')
 
             if(!project) throw createError(404, 'Proyecto no encontrado');
 

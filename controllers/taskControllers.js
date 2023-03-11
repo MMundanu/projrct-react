@@ -1,3 +1,7 @@
+const Task = require('../database/models/task')
+const Project = require('../database/models/project');
+const createHttpError = require('http-errors');
+
 module.exports = {
     list : async (req,res) => {
         try {
@@ -15,9 +19,30 @@ module.exports = {
     },
     store : async (req,res) => {
         try {
+
+            const {name, description, priority, project: projectId} = req.body;
+
+            if(
+                [name, description, priority].includes('') ||
+                !name ||
+                !description ||
+                !priority
+            )
+              throw createHttpError(400, 'Todos los campos son obligatorios')
+
+              const project = await Project.findById(projectId)
+
+              if (req.user._id.toString() !== project.createdBy.toString()) throw createError(403, "No estás autorizado");              
+              
+              const taskStore = await Task.create(req.body);
+
+              project.tasks.push(taskStore._id);
+              await project.save();
+
+            
             return res.status(201).json({
                 ok : true,
-                msg :'Tarea guardado'
+                msg :'Tarea guardada'
             })
         } catch (error) {
             console.log(error);

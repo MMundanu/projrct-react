@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const {hash, compare} = require('bycrypts.js')
 
 
 const taskSchema = new mongoose.Schema({
@@ -9,7 +8,7 @@ const taskSchema = new mongoose.Schema({
         trim : true
     },
     description : {
-        type: Date,
+        type: String,
         required : true,
         trim : true
     },

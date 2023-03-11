@@ -31,6 +31,7 @@ export const ProjectEdit = () => {
 
      <Button onClick={handleDelete} >Eliminar</Button>
 
+
      {
             alert.msg && <Alert {...alert}/>
         }

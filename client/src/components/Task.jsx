@@ -1,14 +1,14 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 
-export const Task = () => {
+export const Task = ({name, description, dateExpire, priority}) => {
   return (
     <div className='w-100 p-2 d-flex flex-wrap justify-content-between mx-2 my-2 border border-1 rounded align-items-center ' >
         <div>
-            <p className='fs-5' >Tarea</p>
-            <p className='fs-6'>Descripcion</p>
-            <p className='fs-5'>Fecha de entrega</p>
-            <p className='fs-6'>Prioridad</p>
+            <p className='fs-5' >{name}</p>
+            <p className='fs-6'>{description}</p>
+            <p className='fs-5'>{dateExpire} </p>
+            <p className='fs-6'>{priority}</p>
         </div>
         <div>
             <Button className='bg-success mx-1' >

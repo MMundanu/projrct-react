@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useForm } from '../hooks/useForm';
 import useProjects from "../hooks/useProjects";
+import {Alert} from '../components/Alert'
 
 
 export const ModalFormTask = () => {
 
-    const { showModal, handleShowModal, storeTask, showAlertModal, showAlert } = useProjects();
+    const { showModal, handleShowModal, storeTask, showAlertModal, showAlert, alertModal } = useProjects();
 
     const {formValues, handleInputChange, reset} = useForm({
         name : "",
@@ -53,6 +54,7 @@ export const ModalFormTask = () => {
             <Modal show={showModal} onHide={handleClosed}>
                 <Modal.Header closeButton>
                     <Modal.Title>Nueva tarea</Modal.Title>
+                   
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit} >
@@ -104,6 +106,9 @@ export const ModalFormTask = () => {
                 ))}
               </select>
             </Form.Group>
+            {
+            alertModal.msg && <Alert {...alertModal}/>
+        }
                            
                         <Button type='submit' variant="primary" >
                         Guardar tarea

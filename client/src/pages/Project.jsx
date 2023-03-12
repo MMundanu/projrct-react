@@ -30,6 +30,7 @@ export const Project = () => {
         <p>cargando...</p>
       ) : (
       <>
+      
       <div>
       <h1>{name}</h1>
       <h2>{client}</h2>
@@ -49,10 +50,16 @@ export const Project = () => {
       </div>
     </div>
     {
-      [1,2].map((task, i) => (
-        <Task key={task + i} />
-      ))
+      loading ? 
+      <p>cargando...</p> 
+      :
+      project.tasks.length
+      ?
+      project.tasks.map((task, i) => <Task key={task + i} {...task} />)
+      :
+      <p>No hay proyectos agregados</p>
     }
+    
 
     <div>
       <p>Colaboradores</p>

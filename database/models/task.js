@@ -29,7 +29,7 @@ const taskSchema = new mongoose.Schema({
         enum: ['Baja', 'Media', 'Alta'],
         default: 'Baja'
     },
-    poject: {
+    project: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project'
     }

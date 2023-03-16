@@ -7,7 +7,7 @@ export const Task = ({name, description, dateExpire, priority}) => {
         <div>
             <p className='fs-5' >{name}</p>
             <p className='fs-6'>{description}</p>
-            <p className='fs-5'>{dateExpire} </p>
+            <p className='fs-5'>{dateExpire.split('T')[0]} </p>
             <p className='fs-6'>{priority}</p>
         </div>
         <div>

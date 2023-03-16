@@ -51,13 +51,13 @@ export const Project = () => {
     </div>
     {
       loading ? 
-      <p>cargando...</p> 
+      (<p>cargando...</p>) 
       :
-      project.tasks.length
+      (project.tasks.length
       ?
       project.tasks.map((task, i) => <Task key={task + i} {...task} />)
       :
-      <p>No hay proyectos agregados</p>
+      <p>No hay tareas agregados</p>)
     }
     
 
